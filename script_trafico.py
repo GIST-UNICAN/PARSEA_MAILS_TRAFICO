@@ -17,7 +17,7 @@ import functools
 from tools import general
 import MySQLdb
 import itertools
-
+import simplekml
 gmaps = googlemaps.Client(key='AIzaSyCiHoYbihmxJ3U-AA8uPrU-6HET58UiqMc')
 pattern = "(^.+dias )(?P<dia_desde>.{10})( y )(?P<dia_hasta>.{10})(.*?las )(?P<hora_desde>.{5})(.*?las )(?P<hora_hasta>.{5})(.*?calle )(?P<calle>.*?)(\(.*?Número )(?P<numero>.*?)( se .*?corte )(?P<tipo_corte>.*?$)"
 pattern_numero = "(?P<primer_numero>^[0-9]*)(?P<letras>[ A-Z\-a-z\/ \\ ]*)(?P<segundo_numero>[0-9]*)"
@@ -50,7 +50,6 @@ def parsea_numero(numero):
 
 
 def aplica_geocode(numero, calle):
-    print(numero, calle)
     texto_geocode = f'{calle} {numero} Santander España' if numero else f'{calle} Santander España'
     try:
         d = gmaps.geocode(texto_geocode)[0]['geometry']['location']
@@ -132,3 +131,23 @@ with contextlib.closing(MySQLdb.connect(user='agrega_incidencias_trafico',
         querie_final = querie+lista_txt
         cursor.execute(querie_final)
         conexion.commit()
+# subidos los datos hay que generar el mapa, para ello nos descargamos las coordinadas y pintamos
+querie_descarga = "Select * from `Incidencias_Trafico` where fecha_hasta >= now()"
+with contextlib.closing(MySQLdb.connect(user='agrega_incidencias_trafico',
+                                        password='SYwR6al2eFd2u6ia',
+                                        host='193.144.208.142',
+                                        port=3306,
+                                        database='Trafico_Santander'
+                                        )) as conexion:
+    with contextlib.closing(conexion.cursor()) as cursor:
+        cursor.execute(querie_descarga)
+        incidencias=tuple(iter(cursor))
+        
+kml_doc= simplekml.Kml()
+kml_doc.document.name = ("Tráfico Santandedr")
+for incidencia in incidencias:
+    descripcion=f"Corte {incidencia[10]}  En calle {incidencia[3]} numeros {incidencia[4]} al {incidencia[5]}"
+    punto=kml_doc.newpoint(name=incidencia[3], coords=[(incidencia[7],incidencia[6])], description=descripcion)
+    punto.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/caution.png'
+kml_doc.save('calles.kml')
+    
