@@ -1,23 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="feat_11">
-        <Style id="stylesel_2">
-            <IconStyle id="substyle_2">
+    <Document id="feat_7">
+        <Style id="stylesel_3">
+            <IconStyle id="substyle_3">
                 <colorMode>normal</colorMode>
                 <scale>1</scale>
                 <heading>0</heading>
-                <Icon id="link_2">
+                <Icon id="link_3">
+                    <href>http://maps.google.com/mapfiles/kml/shapes/caution.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="stylesel_4">
+            <IconStyle id="substyle_4">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="link_4">
+                    <href>http://maps.google.com/mapfiles/kml/shapes/caution.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="stylesel_5">
+            <IconStyle id="substyle_5">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="link_5">
+                    <href>http://maps.google.com/mapfiles/kml/shapes/caution.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="stylesel_6">
+            <IconStyle id="substyle_6">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="link_6">
                     <href>http://maps.google.com/mapfiles/kml/shapes/caution.png</href>
                 </Icon>
             </IconStyle>
         </Style>
         <name>Tráfico Santandedr</name>
-        <Placemark id="feat_12">
+        <Placemark id="feat_8">
             <name>PEÑA HERBOSA </name>
-            <description>Corte total de vía. En calle PEÑA HERBOSA  numeros 1 al 15</description>
-            <styleUrl>#stylesel_2</styleUrl>
-            <Point id="geom_5">
+            <description>Corte total de vía.  En calle PEÑA HERBOSA  numeros 1 al 15</description>
+            <styleUrl>#stylesel_3</styleUrl>
+            <Point id="geom_3">
                 <coordinates>-3.79952,43.4634,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="feat_9">
+            <name>HERNAN CORTES </name>
+            <description>Corte total de vía.  En calle HERNAN CORTES  numeros 53 al 61</description>
+            <styleUrl>#stylesel_4</styleUrl>
+            <Point id="geom_4">
+                <coordinates>-3.79823,43.4632,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="feat_10">
+            <name>SEGUNDO LOPEZ VELEZ </name>
+            <description>Corte parcial de vía.  En calle SEGUNDO LOPEZ VELEZ  numeros 0 al 0</description>
+            <styleUrl>#stylesel_5</styleUrl>
+            <Point id="geom_5">
+                <coordinates>-3.83337,43.4569,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="feat_11">
+            <name>MENENDEZ PELAYO </name>
+            <description>Corte parcial de vía.  En calle MENENDEZ PELAYO  numeros 104 al 0</description>
+            <styleUrl>#stylesel_6</styleUrl>
+            <Point id="geom_6">
+                <coordinates>-3.78914,43.4675,0.0</coordinates>
             </Point>
         </Placemark>
     </Document>

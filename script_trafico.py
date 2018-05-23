@@ -32,21 +32,23 @@ def parsea_numero(numero):
     try:
         n1 = numero['primer_numero']
         devolver += str(n1)
-    except KeyError:
-        n1 = None
+        n1=int(n1)
+    except:
+        n1 = 'NULL'
         pass
     try:
         n2 = numero['segundo_numero']
         devolver += ' - '+str(n2)
-    except KeyError:
-        n2 = None
+        n2=int(n2)
+    except:
+        n2 = 'NULL'
         pass
     try:
         media = int((int(n1)+int(n2))/2)
-    except TypeError:
-        media = None
+    except:
+        media = 'NULL'
 
-    return (devolver, (int(n1), int(n2), media))
+    return (devolver, (n1, n2, media))
 
 
 def aplica_geocode(numero, calle):
@@ -63,10 +65,11 @@ lista_query_append = list()
 with closing(imaplib.IMAP4_SSL('imap.gmail.com')) as mail:
     mail.login('unicangist@gmail.com', 'notienestelefono902')
     mail.select("INBOX")  # connect to inbox.
-    result, data = mail.search(None, '(FROM "andres.rodriguez@unican.es")')
+    result, data = mail.search(None, '(FROM "PoliciaLocal@ayto-santander.es")')
 #    for num in data[0].split():
 
-    for num in ("309",):
+    for num in data[0].split(b' '):
+        print (num)
         try:
             correo_data = mail.fetch(num, '(RFC822)')
         except TypeError:
@@ -132,7 +135,7 @@ with contextlib.closing(MySQLdb.connect(user='agrega_incidencias_trafico',
         cursor.execute(querie_final)
         conexion.commit()
 # subidos los datos hay que generar el mapa, para ello nos descargamos las coordinadas y pintamos
-querie_descarga = "Select * from `Incidencias_Trafico` where fecha_hasta >= now()"
+querie_descarga = "Select * from `Incidencias_Trafico` where fecha_hasta >= now() and fecha_desde <=now()"
 with contextlib.closing(MySQLdb.connect(user='agrega_incidencias_trafico',
                                         password='SYwR6al2eFd2u6ia',
                                         host='193.144.208.142',
@@ -149,5 +152,5 @@ for incidencia in incidencias:
     descripcion=f"Corte {incidencia[10]}  En calle {incidencia[3]} numeros {incidencia[4]} al {incidencia[5]}"
     punto=kml_doc.newpoint(name=incidencia[3], coords=[(incidencia[7],incidencia[6])], description=descripcion)
     punto.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/caution.png'
-kml_doc.save('calles.kml')
+kml_doc.save('/var/www/html/espiras/programa_ejecutar/calles.kml')
     
