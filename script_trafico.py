@@ -149,7 +149,7 @@ with contextlib.closing(MySQLdb.connect(user='agrega_incidencias_trafico',
 kml_doc= simplekml.Kml()
 kml_doc.document.name = ("Tráfico Santandedr")
 for incidencia in incidencias:
-    descripcion=f"Corte {incidencia[10]}  En calle {incidencia[3]} numeros {incidencia[4]} al {incidencia[5]}"
+    descripcion=f"DESDE el {incidencia[1]} \nHASTA {incidencia[2]} \nCorte {incidencia[10]}  \nEn calle {incidencia[3]} numeros {incidencia[4]} al {incidencia[5]}"
     punto=kml_doc.newpoint(name=incidencia[3], coords=[(incidencia[7],incidencia[6])], description=descripcion)
     punto.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/caution.png'
 kml_doc.save('/var/www/html/espiras/programa_ejecutar/calles.kml')
